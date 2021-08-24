@@ -5,19 +5,23 @@ using TMPro;
 
 public class Cube : MonoBehaviour
 {
+    static int staticID = 0;
+
     [SerializeField] private TMP_Text[] _numbersText;
 
+    [HideInInspector] public int CubeID;
     [HideInInspector] public Color CubeColor;
     [HideInInspector] public int CubeNumber;
-    [HideInInspector] public Rigidbody Rigidbody;
+    [HideInInspector] public Rigidbody CubeRigidbody;
     [HideInInspector] public bool IsMainCube;
 
     private MeshRenderer _cubeMeshRenderer;
 
     private void Awake()
     {
+        CubeID = staticID++;
         _cubeMeshRenderer = GetComponent<MeshRenderer>();
-        Rigidbody = GetComponent<Rigidbody>();
+        CubeRigidbody = GetComponent<Rigidbody>();
     }
 
     public void SetColor(Color color)
