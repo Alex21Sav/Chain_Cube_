@@ -18,9 +18,7 @@ public class CubeSpawner : MonoBehaviour
     [HideInInspector] public int maxCubeNumber;
     //in our case it's 4096 2^12
     private int _maxPower = 12;
-    private Vector3 _defaultSpawnPosition;
-
-    
+    private Vector3 _defaultSpawnPosition;     
 
     private void Awake()
     {
@@ -28,13 +26,11 @@ public class CubeSpawner : MonoBehaviour
         {
             Instance = this;
         }
-
         _defaultSpawnPosition = transform.position;
         maxCubeNumber = (int)Mathf.Pow(2, _maxPower);
 
         InitializeCubesQueue();
     }
-
     private void InitializeCubesQueue()
     {
         for (int i = 0; i < _cubesQueueCapacity; i++)
@@ -42,7 +38,6 @@ public class CubeSpawner : MonoBehaviour
             AddCubeToQueue();
         }
     }
-
     private void AddCubeToQueue()
     {
         Cube cube = Instantiate(_prefabCube, _defaultSpawnPosition, Quaternion.identity, transform).GetComponent<Cube>();
@@ -52,7 +47,6 @@ public class CubeSpawner : MonoBehaviour
         CubesQueue.Enqueue(cube);
 
     }
-
     public Cube Spawn(int number, Vector3 positin)
     {
         if (CubesQueue.Count == 0)
@@ -68,7 +62,6 @@ public class CubeSpawner : MonoBehaviour
                 return null;
             }
         }
-
         Cube cube = CubesQueue.Dequeue();
         cube.transform.position = positin;
         cube.SetNumbe(number);
@@ -77,12 +70,10 @@ public class CubeSpawner : MonoBehaviour
 
         return cube;
     }
-
     public Cube SpawnRandom()
     {
         return Spawn(GenrateRandomNumber(), _defaultSpawnPosition);
     }
-
     public void DestroyCube(Cube cube)
     {
         cube.CubeRigidbody.velocity = Vector3.zero;
@@ -92,12 +83,10 @@ public class CubeSpawner : MonoBehaviour
         cube.gameObject.SetActive(false);
         CubesQueue.Enqueue(cube);
     }
-
     public int GenrateRandomNumber()
     {
         return (int)Mathf.Pow(2, Random.Range(1, 6));
     }
-
     private Color GetColor(int nomber)
     {
         return _cubeColors[(int)(Mathf.Log(nomber) / Mathf.Log(2)) - 1 ];

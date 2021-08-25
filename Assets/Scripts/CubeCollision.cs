@@ -10,7 +10,6 @@ public class CubeCollision : MonoBehaviour
     {
         cube = GetComponent<Cube>();
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         Cube otherCube = collision.gameObject.GetComponent<Cube>();
@@ -43,10 +42,11 @@ public class CubeCollision : MonoBehaviour
                     if (coll.attachedRigidbody != null)
                         coll.attachedRigidbody.AddExplosionForce(explosionForce, contactPoint, explosionRadius);
                 }
+                FX.Instance.PlayCubeExplosionFX(contactPoint, cube.CubeColor);
+
                 CubeSpawner.Instance.DestroyCube(cube);
                 CubeSpawner.Instance.DestroyCube(otherCube);
             }            
         }
-
     }
 }

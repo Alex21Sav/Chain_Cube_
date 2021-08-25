@@ -23,13 +23,11 @@ public class Cube : MonoBehaviour
         _cubeMeshRenderer = GetComponent<MeshRenderer>();
         CubeRigidbody = GetComponent<Rigidbody>();
     }
-
     public void SetColor(Color color)
     {
         CubeColor = color;
         _cubeMeshRenderer.material.color = color;
     }
-
     public void SetNumbe(int number)
     {
         CubeNumber = number;
@@ -38,5 +36,4 @@ public class Cube : MonoBehaviour
             _numbersText[i].text = number.ToString();
         }
     }
-
 }

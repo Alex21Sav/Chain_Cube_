@@ -805,7 +805,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4103065192177047661}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: fb7458e3a3f18434aab25f9c5c668a52, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -846,6 +846,7 @@ MonoBehaviour:
   - {fileID: 6249418128809591601}
   - {fileID: 2678372014532963150}
   - {fileID: 1641840769844937195}
+  CubeID: 0
   CubeColor: {r: 0, g: 0, b: 0, a: 0}
   CubeNumber: 0
   CubeRigidbody: {fileID: 0}

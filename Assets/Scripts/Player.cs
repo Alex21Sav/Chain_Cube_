@@ -13,17 +13,18 @@ public class Player : MonoBehaviour
     private Cube _mainCube;
 
     private bool _isPointerDown;
+    private bool _canMove;
     private Vector3 _cubePostion;
 
     private void Start()
     {
         SpawnCube();
+        _canMove = true; 
 
         _touchSlider.OnPointerDownEvent += OnPointerDown;
         _touchSlider.OnPointerDragEvent += OnPointerDrag;
         _touchSlider.OnPointerUpEvent += OnPointerUp;
     }
-
     private void Update()
     {
         if (_isPointerDown)
@@ -33,7 +34,6 @@ public class Player : MonoBehaviour
     {
         _isPointerDown = true;
     }
-
     private void OnPointerDrag(float xMovement)
     {
         if (_isPointerDown)
@@ -42,13 +42,12 @@ public class Player : MonoBehaviour
             _cubePostion.x = xMovement * _cubeMaxPositionX;
         }
     }
-
     private void OnPointerUp()
     {
-        if (_isPointerDown)
+        if (_isPointerDown && _canMove)
         {
             _isPointerDown = false;
-
+            _canMove = false;
             //push the cube
             _mainCube.CubeRigidbody.AddForce(Vector3.forward * _pushForce, ForceMode.Impulse);
 
@@ -56,10 +55,10 @@ public class Player : MonoBehaviour
             Invoke ("SpawnNewCube", 0.3f);
         }
     }
-
     private void SpawnNewCube()
     {
         _mainCube.IsMainCube = false;
+        _canMove = true;
         SpawnCube();
     }
 
